@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DemoEcommerceApp</string>
+    <string name="ShoppingOnline">Shop Online</string>
+    <string name="size">size</string>
+    <string name="color">color</string>
+    <string name="id">id</string>
+    <string name="price">price</string>
+</resources>
