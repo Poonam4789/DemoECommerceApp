@@ -19,6 +19,7 @@ import com.example.demoecommerceapp.R;
 import com.example.demoecommerceapp.adapters.CategoryPagerAdapter;
 import com.example.demoecommerceapp.appBase.CommertialMainActivity;
 import com.example.demoecommerceapp.model.CategoriesVO;
+import com.example.demoecommerceapp.model.RankingVO;
 import com.example.demoecommerceapp.network.RestApiInterface;
 import com.google.android.material.tabs.TabLayout;
 
@@ -38,6 +39,7 @@ public class CategoryPageFragment extends Fragment
     private ViewPager _productsPager;
     private CategoryPagerAdapter _categoryPagerAdapter;
     private List<CategoriesVO> _categoriesVOList;
+    private List<RankingVO> _rankingVOList;
     private CommertialMainActivity commertialMainActivity;
     private TextView _all_title;
 
@@ -74,9 +76,10 @@ public class CategoryPageFragment extends Fragment
                     commertialMainActivity.showHideProgress(STATUS_SUCCESS);
                     Log.d(TAG, "Got the body for the file");
                     _categoriesVOList = response.body().getCategoriesList();
+                    _rankingVOList = response.body().getRankings();
                     if (_categoriesVOList != null)
                     {
-                        SetTabPagerAdapters(_categoriesVOList);
+                        SetTabPagerAdapters(_categoriesVOList,_rankingVOList);
                         Log.d(TAG, "Response " + response.body().toString());
                         Log.d(TAG, "CategoryList " + response.body().getCategoriesList().get(0).getCategoryName());
                     }
@@ -98,9 +101,9 @@ public class CategoryPageFragment extends Fragment
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private void SetTabPagerAdapters(List<CategoriesVO> categoriesList)
+    private void SetTabPagerAdapters(List<CategoriesVO> categoriesList, List<RankingVO> rankingVOList)
     {
-        _categoryPagerAdapter = new CategoryPagerAdapter(getChildFragmentManager(), categoriesList);
+        _categoryPagerAdapter = new CategoryPagerAdapter(getChildFragmentManager(), categoriesList,rankingVOList);
         _categoryTabs.setupWithViewPager(_productsPager);
         _productsPager.setAdapter(_categoryPagerAdapter);
         _productsPager.setCurrentItem(0);
@@ -128,6 +131,11 @@ public class CategoryPageFragment extends Fragment
             _categoryTabs.setVisibility(View.GONE);
             _all_title.setVisibility(View.VISIBLE);
         }
+    }
+
+    public List<RankingVO> get_rankingVOList()
+    {
+        return _rankingVOList;
     }
 
     @Override

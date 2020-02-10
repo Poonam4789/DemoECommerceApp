@@ -15,6 +15,7 @@ import com.example.demoecommerceapp.Fragments.ProductsCoverFragment;
 import com.example.demoecommerceapp.Fragments.VariantDetailFragment;
 import com.example.demoecommerceapp.R;
 import com.example.demoecommerceapp.model.ProductsVO;
+import com.example.demoecommerceapp.model.RankingProductVO;
 import com.example.demoecommerceapp.model.TaxVO;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class PageListViewAdapter extends ArrayAdapter<ProductsVO>
 {
     LayoutInflater inflater;
     private ArrayList<ProductsVO> _productsList;
+    private ArrayList<RankingProductVO> _viewCountProductsList;
     private TaxVO _taxVOS;
     private TextView _productId, _productName, _productAddDate, _productTax;
 
@@ -36,6 +38,13 @@ public class PageListViewAdapter extends ArrayAdapter<ProductsVO>
         _fragmentManager = supportFragmentManager;
     }
 
+    public PageListViewAdapter(@NonNull Context context, int resource, FragmentManager supportFragmentManager, @NonNull ArrayList<RankingProductVO> productsVOArrayList)
+    {
+        super(context, resource, _viewCountProductsList);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        _viewCountProductsList = productsVOArrayList;
+        _fragmentManager = supportFragmentManager;
+    }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent)

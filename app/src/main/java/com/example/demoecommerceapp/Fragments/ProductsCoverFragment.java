@@ -20,6 +20,7 @@ import com.example.demoecommerceapp.R;
 import com.example.demoecommerceapp.adapters.PageListViewAdapter;
 import com.example.demoecommerceapp.adapters.ProductPageAdapter;
 import com.example.demoecommerceapp.model.ProductsVO;
+import com.example.demoecommerceapp.model.RankingProductVO;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +35,7 @@ public class ProductsCoverFragment extends Fragment implements CompoundButton.On
 
     private RecyclerView _productCoversListView;
     private ArrayList<ProductsVO> _productList;
-    private ArrayList<ProductsVO> _allProductsList;
+    private ArrayList<RankingProductVO> _allProductsList;
     private ProductPageAdapter _productPageAdapter;
     private PageListViewAdapter _pageListViewAdapter;
     private ProgressBar _progressBar;
@@ -141,17 +142,17 @@ public class ProductsCoverFragment extends Fragment implements CompoundButton.On
         }
     }
 
-    public void SortListByRanking(ArrayList<ProductsVO> _productList)
+    public void SortListByRanking(ArrayList<RankingProductVO> _productList)
     {
         Collections.sort(_productList, new ProductComparator());
     }
 
-    public class ProductComparator implements Comparator<ProductsVO>
+    public class ProductComparator implements Comparator<RankingProductVO>
     {
         @Override
-        public int compare(ProductsVO productsVO1, ProductsVO productsVO2)
+        public int compare(RankingProductVO productsVO1, RankingProductVO productsVO2)
         {
-            return Integer.parseInt(productsVO1.getProductId()) - Integer.parseInt(productsVO2.getProductId());
+            return productsVO1.getViewCount() - productsVO2.getViewCount();
         }
     }
 }

@@ -3,9 +3,11 @@ package com.example.demoecommerceapp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CategoriesVO implements Parcelable
 {
@@ -18,7 +20,17 @@ public class CategoriesVO implements Parcelable
     @SerializedName("products")
     private ArrayList<ProductsVO> products;
 
+    @SerializedName("child_categories")
+    @Expose
+    private ArrayList<Integer> childCategories = null;
 
+    public ArrayList<Integer> getChildCategories() {
+        return childCategories;
+    }
+
+    public void setChildCategories(ArrayList<Integer> childCategories) {
+        this.childCategories = childCategories;
+    }
     @Override
     public int describeContents()
     {

@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.demoecommerceapp.Fragments.ProductsCoverFragment;
 import com.example.demoecommerceapp.model.CategoriesVO;
 import com.example.demoecommerceapp.model.ProductsVO;
+import com.example.demoecommerceapp.model.RankingProductVO;
+import com.example.demoecommerceapp.model.RankingVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +19,15 @@ import java.util.List;
 public class CategoryPagerAdapter extends FragmentStatePagerAdapter
 {
     private List<CategoriesVO> _productCategoryList;
-    private ArrayList<ProductsVO> _productsAllVOS;
+    private ArrayList<RankingProductVO> _productsAllVOS;
+    private List<RankingVO> _rankingVOList;
 
-    public CategoryPagerAdapter(FragmentManager fm, List<CategoriesVO> productCategoryList)
+    public CategoryPagerAdapter(FragmentManager fm, List<CategoriesVO> productCategoryList, List<RankingVO> rankingVOList)
     {
         super(fm);
         _productCategoryList = productCategoryList;
-        _productsAllVOS = new ArrayList<ProductsVO>();
+        _rankingVOList = rankingVOList;
+        _productsAllVOS = new ArrayList<RankingProductVO>();
         getAllProductsList();
     }
 
@@ -54,7 +58,7 @@ public class CategoryPagerAdapter extends FragmentStatePagerAdapter
     {
         for (int i = 0; i < _productCategoryList.size(); i++)
         {
-            _productsAllVOS.addAll(_productCategoryList.get(i).getProducts());
+            _productsAllVOS.addAll(_rankingVOList.get(i).getProducts());
         }
         Log.d("SORT", "UNSORTED" + _productsAllVOS.size());
     }
