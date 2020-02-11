@@ -8,41 +8,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import com.example.demoecommerceapp.Fragments.ProductsCoverFragment;
 import com.example.demoecommerceapp.Fragments.VariantDetailFragment;
 import com.example.demoecommerceapp.R;
 import com.example.demoecommerceapp.model.ProductsVO;
-import com.example.demoecommerceapp.model.RankingProductVO;
 import com.example.demoecommerceapp.model.TaxVO;
 
 import java.util.ArrayList;
 
 public class PageListViewAdapter extends ArrayAdapter<ProductsVO>
 {
-    LayoutInflater inflater;
+    private LayoutInflater inflater;
     private ArrayList<ProductsVO> _productsList;
-    private ArrayList<RankingProductVO> _viewCountProductsList;
-    private TaxVO _taxVOS;
-    private TextView _productId, _productName, _productAddDate, _productTax;
 
-    FragmentManager _fragmentManager;
+    private FragmentManager _fragmentManager;
 
     public PageListViewAdapter(@NonNull Context context, int resource, FragmentManager supportFragmentManager, @NonNull ArrayList<ProductsVO> productsVOArrayList)
     {
         super(context, resource, productsVOArrayList);
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         _productsList = productsVOArrayList;
-        _fragmentManager = supportFragmentManager;
-    }
-
-    public PageListViewAdapter(@NonNull Context context, int resource, FragmentManager supportFragmentManager, @NonNull ArrayList<RankingProductVO> productsVOArrayList)
-    {
-        super(context, resource, _viewCountProductsList);
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        _viewCountProductsList = productsVOArrayList;
         _fragmentManager = supportFragmentManager;
     }
 
@@ -55,15 +42,15 @@ public class PageListViewAdapter extends ArrayAdapter<ProductsVO>
         }
 
         final ProductsVO vo = getItem(position);
-        _productId = (TextView) convertView.findViewById(R.id.product_Id);
-        _productName = (TextView) convertView.findViewById(R.id.product_name);
-        _productAddDate = (TextView) convertView.findViewById(R.id.product_add_date);
-        _productTax = (TextView) convertView.findViewById(R.id.product_tax);
+        TextView _productId = (TextView) convertView.findViewById(R.id.product_Id);
+        TextView _productName = (TextView) convertView.findViewById(R.id.product_name);
+        TextView _productAddDate = (TextView) convertView.findViewById(R.id.product_add_date);
+        TextView _productTax = (TextView) convertView.findViewById(R.id.product_tax);
 
         _productId.setText(vo.getProductId());
         _productName.setText(vo.getProductName());
         _productAddDate.setText(vo.getProductAddedDate());
-        _taxVOS = vo.getTax();
+        TaxVO _taxVOS = vo.getTax();
 
         Log.d("TAX", "SIze from List" + _taxVOS.taxAmount);
         _productTax.setText(_taxVOS.taxName + " : " + _taxVOS.taxAmount);

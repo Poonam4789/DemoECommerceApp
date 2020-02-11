@@ -9,52 +9,50 @@ import androidx.annotation.RequiresApi;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 public class RankingProductVO implements Parcelable
 {
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
     @SerializedName("view_count")
     @Expose
-    private Integer viewCount;
+    private int viewCount;
     @SerializedName("order_count")
     @Expose
-    private Integer orderCount;
+    private int orderCount;
     @SerializedName("shares")
     @Expose
-    private Integer shares;
+    private int shares;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getViewCount() {
+    public int getViewCount() {
         return viewCount;
     }
 
-    public void setViewCount(Integer viewCount) {
+    public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
     }
 
-    public Integer getOrderCount() {
+    public int getOrderCount() {
         return orderCount;
     }
 
-    public void setOrderCount(Integer orderCount) {
+    public void setOrderCount(int orderCount) {
         this.orderCount = orderCount;
     }
 
-    public Integer getShares() {
+    public int getShares() {
         return shares;
     }
 
-    public void setShares(Integer shares) {
+    public void setShares(int shares) {
         this.shares = shares;
     }
 

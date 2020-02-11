@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <Switch
         android:id="@+id/swich_ranking"
@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:checked="false"
-        android:text="Ranking"/>
+        android:text="Ranking" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_view"
@@ -18,15 +18,29 @@
         android:layout_below="@+id/swich_ranking"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:visibility="visible"
-        />
+        android:visibility="visible" />
 
-    <ListView
-        android:id="@+id/rankingLiew"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:id="@+id/ll_ranking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/swich_ranking"
-        android:visibility="gone"/>
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/ranking_filter"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="8dp" />
+
+        <ListView
+            android:id="@+id/rankingLiew"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/page_progress"
@@ -34,6 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:indeterminate="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

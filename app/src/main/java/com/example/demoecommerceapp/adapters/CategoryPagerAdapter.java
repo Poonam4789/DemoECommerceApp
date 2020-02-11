@@ -18,8 +18,12 @@ import java.util.List;
 
 public class CategoryPagerAdapter extends FragmentStatePagerAdapter
 {
+    private static final String TAG = "CategoryPagerAdapter";
     private List<CategoriesVO> _productCategoryList;
-    private ArrayList<RankingProductVO> _productsAllVOS;
+    private ArrayList<ProductsVO> _productsAllVOS;
+    private ArrayList<RankingProductVO> _mostViewedList;
+    private ArrayList<RankingProductVO> _mostOrderedList;
+    private ArrayList<RankingProductVO> _mostSharedList;
     private List<RankingVO> _rankingVOList;
 
     public CategoryPagerAdapter(FragmentManager fm, List<CategoriesVO> productCategoryList, List<RankingVO> rankingVOList)
@@ -27,8 +31,12 @@ public class CategoryPagerAdapter extends FragmentStatePagerAdapter
         super(fm);
         _productCategoryList = productCategoryList;
         _rankingVOList = rankingVOList;
-        _productsAllVOS = new ArrayList<RankingProductVO>();
+        _productsAllVOS = new ArrayList<>();
+        _mostViewedList = new ArrayList<>();
+        _mostOrderedList = new ArrayList<>();
+        _mostSharedList = new ArrayList<>();
         getAllProductsList();
+        getRankProductsList();
     }
 
     @Override
@@ -38,6 +46,9 @@ public class CategoryPagerAdapter extends FragmentStatePagerAdapter
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(ProductsCoverFragment.PRODUCT_LIST, _productCategoryList.get(position).getProducts());
         bundle.putParcelableArrayList(ProductsCoverFragment.ALL_PRODUCTS_LIST, _productsAllVOS);
+        bundle.putParcelableArrayList(ProductsCoverFragment.MOST_VIEWED_PRODUCTS_LIST, _mostViewedList);
+        bundle.putParcelableArrayList(ProductsCoverFragment.MOST_ORDERED_PRODUCTS_LIST, _mostOrderedList);
+        bundle.putParcelableArrayList(ProductsCoverFragment.MOST_SHARED_PRODUCTS_LIST, _mostSharedList);
         pageFragment.setArguments(bundle);
         return pageFragment;
     }
@@ -54,12 +65,35 @@ public class CategoryPagerAdapter extends FragmentStatePagerAdapter
         return _productCategoryList.get(position).getCategoryName();
     }
 
-    public void getAllProductsList()
+    private void getAllProductsList()
     {
-        for (int i = 0; i < _productCategoryList.size(); i++)
+            for (int i = 0; i < _productCategoryList.size(); i++)
+            {
+                _productsAllVOS.addAll(_productCategoryList.get(i).getProducts());
+                Log.d(TAG, "getAllProductsList: " + _productsAllVOS.size());
+            }
+        Log.d("SORT", "UNSORTED" + _productCategoryList.size());
+    }
+
+    private void getRankProductsList()
+    {
+        if (_rankingVOList.size() == 3)
         {
-            _productsAllVOS.addAll(_rankingVOList.get(i).getProducts());
+            for (int i = 0; i < _rankingVOList.size(); i++)
+            {
+                if (i == 0)
+                {
+                    _mostViewedList.addAll(_rankingVOList.get(i).getProducts());
+                } else if (i == 1)
+                {
+                    _mostOrderedList.addAll(_rankingVOList.get(i).getProducts());
+                } else
+                {
+                    _mostSharedList.addAll(_rankingVOList.get(i).getProducts());
+                }
+                Log.d(TAG, "getAllProductsList: " + _mostViewedList.size());
+            }
         }
-        Log.d("SORT", "UNSORTED" + _productsAllVOS.size());
+        Log.d("SORT", "UNSORTED" + _mostSharedList.size());
     }
 }
